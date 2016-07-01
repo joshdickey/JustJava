@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -34,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         int price = calculatePrice();
         CheckBox addWhip =(CheckBox) findViewById(R.id.whipped_cream_checkbox);
-        displayMessage(createOrderSummary(price, addWhip.isChecked()));
+        CheckBox addChocolate = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        EditText name = (EditText) findViewById(R.id.name_edittext);
+
+        displayMessage(createOrderSummary(price, addWhip.isChecked(), addChocolate.isChecked(), name.getText().toString()));
     }
 
     /**
@@ -43,9 +47,10 @@ public class MainActivity extends AppCompatActivity {
      * @return the summary of the order including price
      * @param priceOfOrder is the price
      */
-    private String createOrderSummary(int priceOfOrder, boolean topping){
-        String orderSummary = "Name: Kaptain Kunal\n" +
-                "Add whipped cream? " + topping + "\n" +
+    private String createOrderSummary(int priceOfOrder, boolean topping1, boolean topping2, String name){
+        String orderSummary = "Name: " + name + "\n" +
+                "Add whipped cream? " + topping1 + "\n" +
+                "Add chocolate? " + topping2 + "\n" +
                 "Quantity: " + quantity + "\n" +
                 "Total: $" + priceOfOrder + "\n" +
                 "Thank You!";
